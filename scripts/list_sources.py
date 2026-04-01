@@ -2,21 +2,24 @@
 # Imports
 # -----------------------------
 import asyncio
-from notebooklm import NotebookLMClient
 
-# -----------------------------
-# Config
-# -----------------------------
-NOTEBOOK_ID = "d0a422ec-7d41-4dec-946d-ce378e6151af"
-AUTH_STORAGE_PATH = ".notebooklm_state/storage_state.json"
+from notebooklm import NotebookLMClient
+from notebooklm_automation.config import load_config
 
 
 # -----------------------------
 # Main
 # -----------------------------
 async def main() -> None:
-    async with await NotebookLMClient.from_storage(AUTH_STORAGE_PATH) as client:
-        sources = await client.sources.list(NOTEBOOK_ID)
+    config = load_config()
+
+    if not config.default_notebook_id:
+        raise ValueError(
+            "DEFAULT_NOTEBOOK_ID is missing from .env. Set it before running list_sources.py."
+        )
+
+    async with await NotebookLMClient.from_storage(str(config.auth_storage_path)) as client:
+        sources = await client.sources.list(config.default_notebook_id)
 
         print(f"Found {len(sources)} sources:\n")
 

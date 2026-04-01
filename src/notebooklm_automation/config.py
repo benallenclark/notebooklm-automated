@@ -15,6 +15,7 @@ load_dotenv(PROJECT_ROOT / ".env")
 @dataclass(frozen=True)
 class AppConfig:
     default_notebook_id: str | None
+    auth_storage_path: Path
     concepts_csv: Path
     prompts_dir: Path
     output_dir: Path
@@ -36,6 +37,10 @@ def _resolve_path(raw_value: str, default_value: str) -> Path:
 def load_config() -> AppConfig:
     return AppConfig(
         default_notebook_id=os.getenv("DEFAULT_NOTEBOOK_ID") or None,
+        auth_storage_path=_resolve_path(
+            os.getenv("AUTH_STORAGE_PATH", ""),
+            ".notebooklm_state/storage_state.json",
+        ),
         concepts_csv=_resolve_path(os.getenv("CONCEPTS_CSV", ""), "data/concepts.csv"),
         prompts_dir=_resolve_path(os.getenv("PROMPTS_DIR", ""), "prompts"),
         output_dir=_resolve_path(os.getenv("OUTPUT_DIR", ""), "output"),
