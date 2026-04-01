@@ -8,6 +8,8 @@ What it does:
 - Creates one HTML page per markdown file
 - Each concept page includes a Home button back to the hub
 - Links open in the same tab by default
+- Checkboxes next to each concept persist via localStorage
+- Concept order is controlled by the `ordered_concepts` list below
 
 Usage:
     python build_study_hub.py
@@ -22,6 +24,36 @@ import html
 import re
 import shutil
 from pathlib import Path
+
+
+# -----------------------------------------------------------------------
+# Fill this list with markdown file stems (without .md) in the order you
+# want them displayed on the hub page.  Any files NOT listed here will be
+# appended alphabetically after the listed ones.
+#
+# Example:
+#   ordered_concepts = [
+#       "01_introduction",
+#       "02_core_concepts",
+#       "03_advanced_topics",
+#   ]
+# -----------------------------------------------------------------------
+ordered_concepts: list[str] = [
+    # "your_file_stem_here",
+    "software_development_lifecycle_sdlc",
+    "predictive_development_models",
+    "adaptive_development_models",
+    "spiral_model",
+    "secure_sdlc_ssdlc_and_shift_left",
+    "threat_modeling",
+    "verification",
+    "validation",
+    "functional_testing",
+    "security_testing",
+    "static_application_security_testing_sast",
+    "dynamic_application_security_testing_dast",
+    "software_composition_analysis_sca",
+]
 
 
 # -----------------------------
@@ -133,7 +165,7 @@ def markdown_to_html(md_text: str) -> str:
 # -----------------------------
 # HTML builders
 # -----------------------------
-def base_html(title: str, body: str) -> str:
+def base_html(title: str, body: str, extra_head: str = "") -> str:
     """Wrap content in a simple readable HTML shell."""
     safe_title = html.escape(title)
     return f"""<!doctype html>
@@ -155,6 +187,9 @@ def base_html(title: str, body: str) -> str:
       --accent: #6aa6ff;
       --accent-2: #84b8ff;
       --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --done-bg: #0e2a1a;
+      --done-border: #1e5c35;
+      --done-text: #6ee8a0;
     }}
 
     @media (prefers-color-scheme: light) {{
@@ -169,6 +204,9 @@ def base_html(title: str, body: str) -> str:
         --accent: #0b61ff;
         --accent-2: #2a73ff;
         --shadow: 0 12px 28px rgba(19,35,68,.08);
+        --done-bg: #edfbf3;
+        --done-border: #6ee8a0;
+        --done-text: #1a6b3a;
       }}
     }}
 
@@ -259,6 +297,7 @@ def base_html(title: str, body: str) -> str:
 
     a {{ color: var(--link); }}
 
+    /* ── Hub list ── */
     .hub-list {{
       list-style: none;
       padding: 0;
@@ -267,8 +306,52 @@ def base_html(title: str, body: str) -> str:
       gap: 14px;
     }}
 
+    .hub-item {{
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }}
+
+    /* Custom checkbox */
+    .concept-checkbox {{
+      appearance: none;
+      -webkit-appearance: none;
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--border);
+      border-radius: 7px;
+      background: var(--surface-2);
+      cursor: pointer;
+      position: relative;
+      transition: background .15s, border-color .15s;
+    }}
+
+    .concept-checkbox:checked {{
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border-color: #16a34a;
+    }}
+
+    .concept-checkbox:checked::after {{
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 2px;
+      width: 7px;
+      height: 11px;
+      border: 2.5px solid #fff;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }}
+
+    .concept-checkbox:hover {{
+      border-color: var(--accent);
+    }}
+
     .hub-card {{
       display: block;
+      flex: 1;
       text-decoration: none;
       color: inherit;
       background: var(--surface-2);
@@ -283,14 +366,60 @@ def base_html(title: str, body: str) -> str:
       border-color: var(--accent);
     }}
 
+    /* "Done" state applied to the whole row */
+    .hub-item.is-done .hub-card {{
+      background: var(--done-bg);
+      border-color: var(--done-border);
+    }}
+
+    .hub-item.is-done .hub-title {{
+      color: var(--done-text);
+      text-decoration: line-through;
+      text-decoration-color: var(--done-text);
+    }}
+
+    .hub-item.is-done .hub-sub {{
+      opacity: 0.55;
+    }}
+
     .hub-title {{
       font-size: 1.05rem;
       font-weight: 700;
       margin-bottom: 6px;
+      transition: color .15s;
     }}
 
     .hub-sub {{ color: var(--muted); font-size: .95rem; }}
+
+    /* Progress bar */
+    .progress-wrap {{
+      margin-bottom: 22px;
+    }}
+
+    .progress-label {{
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }}
+
+    .progress-bar-bg {{
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      height: 10px;
+      overflow: hidden;
+    }}
+
+    .progress-bar-fill {{
+      height: 100%;
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      border-radius: 999px;
+      transition: width .3s ease;
+    }}
   </style>
+  {extra_head}
 </head>
 <body>
   <div class="wrap">
@@ -304,35 +433,111 @@ def base_html(title: str, body: str) -> str:
 
 
 def build_index_page(title: str, entries: list[dict[str, str]]) -> str:
+    """Build the hub index page with checkboxes and localStorage persistence."""
+
+    # Build the list items; each card gets a data-key attribute for localStorage
     cards = []
     for entry in entries:
+        key = html.escape(entry["storage_key"])
         cards.append(
             f"""
-<li>
-  <a class="hub-card" href="{html.escape(entry['html_filename'])}">
-    <div class="hub-title">{html.escape(entry['title'])}</div>
-    <div class="hub-sub">{html.escape(entry['md_filename'])}</div>
+<li class="hub-item" id="item-{key}">
+  <input
+    type="checkbox"
+    class="concept-checkbox"
+    id="chk-{key}"
+    data-key="{key}"
+    aria-label="Mark {html.escape(entry["title"])} as read"
+  >
+  <a class="hub-card" href="{html.escape(entry["html_filename"])}">
+    <div class="hub-title">{html.escape(entry["title"])}</div>
+    <div class="hub-sub">{html.escape(entry["md_filename"])}</div>
   </a>
 </li>
 """
         )
 
+    total = len(entries)
+
     body = f"""
 <div class="topbar">
   <div>
     <h1 style="margin:0;">{html.escape(title)}</h1>
-    <div class="meta">Click a concept to open it in this same tab.</div>
+    <div class="meta">Click a concept to open it. Check the box to mark it as read.</div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-label">
+    <span>Progress</span>
+    <span id="progress-text">0 / {total} completed</span>
+  </div>
+  <div class="progress-bar-bg">
+    <div class="progress-bar-fill" id="progress-fill" style="width: 0%"></div>
   </div>
 </div>
 
 <ul class="hub-list">
-  {''.join(cards)}
+  {"".join(cards)}
 </ul>
+
+<script>
+  (function () {{
+    const STORAGE_PREFIX = "studyhub_read__";
+    const total = {total};
+
+    function storageKey(key) {{
+      return STORAGE_PREFIX + key;
+    }}
+
+    function updateProgress() {{
+      const checked = document.querySelectorAll(".concept-checkbox:checked").length;
+      const pct = total === 0 ? 0 : Math.round((checked / total) * 100);
+      document.getElementById("progress-text").textContent =
+        checked + " / " + total + " completed";
+      document.getElementById("progress-fill").style.width = pct + "%";
+    }}
+
+    function setItemDone(key, done) {{
+      const item = document.getElementById("item-" + key);
+      if (!item) return;
+      if (done) {{
+        item.classList.add("is-done");
+      }} else {{
+        item.classList.remove("is-done");
+      }}
+    }}
+
+    // Restore state from localStorage on load
+    document.querySelectorAll(".concept-checkbox").forEach(function (chk) {{
+      const key = chk.dataset.key;
+      const saved = localStorage.getItem(storageKey(key));
+      if (saved === "1") {{
+        chk.checked = true;
+        setItemDone(key, true);
+      }}
+    }});
+
+    updateProgress();
+
+    // Save state on change
+    document.querySelectorAll(".concept-checkbox").forEach(function (chk) {{
+      chk.addEventListener("change", function () {{
+        const key = chk.dataset.key;
+        localStorage.setItem(storageKey(key), chk.checked ? "1" : "0");
+        setItemDone(key, chk.checked);
+        updateProgress();
+      }});
+    }});
+  }})();
+</script>
 """
     return base_html(title, body)
 
 
-def build_concept_page(hub_title: str, entry_title: str, raw_md_filename: str, content_html: str) -> str:
+def build_concept_page(
+    hub_title: str, entry_title: str, raw_md_filename: str, content_html: str
+) -> str:
     body = f"""
 <div class="topbar">
   <a class="home-btn" href="index.html">← Home</a>
@@ -346,12 +551,45 @@ def build_concept_page(hub_title: str, entry_title: str, raw_md_filename: str, c
 
 
 # -----------------------------
+# Ordering helper
+# -----------------------------
+def sort_entries(entries: list[dict[str, str]], order: list[str]) -> list[dict[str, str]]:
+    """
+    Sort entries so that those whose stem appears in `order` come first
+    (in the given order), followed by any remaining entries alphabetically.
+    """
+    order_index = {stem.strip(): i for i, stem in enumerate(order) if stem.strip()}
+    ordered = []
+    unordered = []
+
+    for entry in entries:
+        stem = entry["stem"]
+        if stem in order_index:
+            ordered.append((order_index[stem], entry))
+        else:
+            unordered.append(entry)
+
+    ordered.sort(key=lambda x: x[0])
+    unordered.sort(key=lambda x: x["title"].lower())
+
+    return [e for _, e in ordered] + unordered
+
+
+# -----------------------------
 # Main build logic
 # -----------------------------
 def build_site(input_dir: Path, site_dir: Path, title: str) -> None:
     md_files = sorted(input_dir.glob("*.md"))
     if not md_files:
         raise FileNotFoundError(f"No .md files found in: {input_dir}")
+    if ordered_concepts:
+        available_stems = {p.stem for p in md_files}
+        missing = [s for s in ordered_concepts if s not in available_stems]
+        if missing:
+            raise ValueError(
+                "ordered_concepts contains stems with no matching .md file:\n"
+                + "\n".join(f"  - {s}" for s in missing)
+            )
 
     site_dir.mkdir(parents=True, exist_ok=True)
     raw_dir = site_dir / "raw"
@@ -366,7 +604,9 @@ def build_site(input_dir: Path, site_dir: Path, title: str) -> None:
 
         # Derive title from first markdown H1 if available
         title_match = re.search(r"^#\s+(.+)$", raw_text, flags=re.MULTILINE)
-        entry_title = title_match.group(1).strip() if title_match else stem.replace("_", " ").title()
+        entry_title = (
+            title_match.group(1).strip() if title_match else stem.replace("_", " ").title()
+        )
 
         # Copy raw markdown into site/raw for optional access
         shutil.copy2(md_path, raw_dir / md_path.name)
@@ -378,11 +618,17 @@ def build_site(input_dir: Path, site_dir: Path, title: str) -> None:
 
         entries.append(
             {
+                "stem": stem,
                 "title": entry_title,
                 "html_filename": html_filename,
                 "md_filename": md_path.name,
+                # Use the slug as the localStorage key so it's stable across rebuilds
+                "storage_key": slugify(stem),
             }
         )
+
+    # Apply custom ordering
+    entries = sort_entries(entries, ordered_concepts)
 
     # Build hub page
     index_html = build_index_page(title, entries)
