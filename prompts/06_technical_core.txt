@@ -1,0 +1,48 @@
+Using only the selected sources, give me the most technically accurate and sharply bounded understanding of [Concept Name] that a careful student should know once they are ready for precision.
+
+Important constraint:
+This is not a beginner explanation.
+This is the exactness pass.
+I want the clearest technically correct boundary of the concept itself.
+
+Structure the answer exactly like this:
+
+1. Exact technical core
+Give the most precise compact statement of what [Concept Name] technically is.
+
+2. Necessary conditions
+State the conditions that must be true for something to genuinely count as [Concept Name].
+
+3. What is NOT required
+State what people often assume is required, but actually is not necessary for the concept to still count.
+
+4. Exact trigger / defining condition
+State the precise event, relation, state, rule, or condition that makes the concept become true or applicable.
+
+5. Sharp technical boundary
+Explain what this concept includes and what it excludes at a technical level.
+If helpful, contrast it briefly against the nearest neighboring concept, but only to sharpen the boundary.
+
+6. Most precise failure of understanding to avoid
+State the single most damaging technical misunderstanding that would make someone think they understand the concept when they actually do not.
+
+Requirements:
+Optimize for technical accuracy, not friendliness.
+Do not re-teach the whole concept from scratch.
+Do not drift into broad examples, history, motivation, or study tips.
+Do not soften the concept into vague plain English if that loses precision.
+Prefer exact conditions over descriptive fluff.
+Distinguish what is essential from what is typical, common, downstream, or merely consequential.
+If the concept is state-based, be explicit about the exact state.
+If the concept is event-based, be explicit about the exact triggering event.
+If the concept is relational, be explicit about exactly what entities or quantities are in relation.
+If the concept is process-based, be explicit about the defining step or transition.
+If the concept is often confused with a neighboring concept, sharpen the boundary, but do not turn this into a full comparison essay.
+The goal is to leave me with the most technically defensible understanding of the concept itself.
+Distinguish explicitly between prerequisites, defining conditions, and common downstream consequences.
+Section 1 should give the compact technical identity of the concept as a whole.
+Section 4 should isolate the exact event, transition, or state condition that flips the concept from not-applicable to applicable.
+If sections 1 and 4 would sound similar, make section 1 the category-level technical statement and section 4 the exact trigger/state boundary.
+Use the simplest exact wording available. If a technical term is necessary, anchor it in plain English within the same sentence when possible.
+Do not smuggle in consequences, interventions, evaluations, remedies, or secondary uses unless the concept itself requires them.
+If the concept does not have a single trigger because it is not event-based, say so directly and state the defining condition or boundary instead.

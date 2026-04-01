@@ -1,0 +1,58 @@
+Using only the selected sources, teach me what [Concept Name] is now that I already understand:
+- why it matters
+- what larger purpose it serves
+- and what this whole thing is really about at a big-picture level
+
+Important constraint:
+At this point, I do NOT need another broad purpose overview.
+I already have the story and the reason it matters.
+Now I want the concept to become mechanically understandable, structurally clear, and technically exact.
+
+This prompt should build naturally on the earlier prompts:
+- first, make the concept feel concrete and graspable
+- then explain how it works
+- then lock in the exact meaning
+- then prevent the most likely confusion
+
+Structure the answer exactly like this:
+
+1. Whole idea in one simple sentence
+· Give the clearest plain-English statement of what the concept is.
+
+2. How it works at a high level
+· In a few sentences, explain how the concept actually works.
+· Focus on the main causal flow or mechanism, not every detail.
+
+3. Why this mechanism works
+· Explain what basic condition, weakness, structure, rule, pattern, or leverage makes this concept able to work at all.
+
+4. First-principles breakdown
+· What the concept is fundamentally about
+· Its essential parts, stages, or ingredients, explained in beginner-friendly language
+
+5. Technical definition
+· Give the more formal, precise, and technically accurate definition.
+
+6. One common mix-up to avoid
+· Name the most likely thing a learner could confuse this concept with.
+· Then explain the sharpest boundary between them in a few sentences.
+
+7. One compact category lock
+· In one short phrase, say what kind of thing this concept is, but only at the level needed to stabilize understanding.
+· Do not turn this into a long classification exercise.
+
+Requirements:
+· Assume the learner already knows the purpose chain and big-picture story.
+· Do not repeat the broader “why does this matter?” explanation unless absolutely necessary.
+· Start with understandability, then move into exactness.
+· Section 1 should make the concept feel easy to mentally grab.
+· Section 2 should explain the main working in a way the learner can visualize.
+· Section 3 should answer the natural question:
+  “Why is this even able to work?”
+· Section 4 should simplify the concept into its essential moving parts without becoming vague.
+· Section 5 should be the most precise part.
+· Section 6 should reduce confusion, not launch into a full comparison essay.
+· Section 7 should only stabilize the concept’s identity; do not over-focus on taxonomy.
+· Do not drift back into broad purpose summaries, final stakes, or actor motives unless needed to clarify the mechanism.
+· The goal is to leave me feeling:
+  “Now I know what this thing is, how it works, why that working is possible, what its essential structure is, and what I should not confuse it with.”

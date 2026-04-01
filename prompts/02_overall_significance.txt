@@ -1,0 +1,40 @@
+Using only the selected sources, give me [Concept Name] as a short, plain-English story that preserves the chain of purposes.
+
+Important constraint:
+I do not want a static summary.
+I do not want a textbook paraphrase.
+I want a short, cohesive story that lets me mentally see:
+- what someone or something is trying to achieve
+- what obstacle or limitation exists
+- how this concept becomes the way through that obstacle
+- what leverage, mechanism, or pattern makes it work
+- what intermediate effect it creates
+- what final outcome or stake it serves
+
+Structure the answer exactly like this:
+
+1. Big-picture story
+· In 4–6 sentences, explain [Concept Name] as one connected story in plain English.
+· The story should naturally preserve this chain:
+  - starting goal or need
+  - obstacle, limitation, or problem
+  - the role this concept plays
+  - how it works at a high level
+  - what it causes next
+  - what final outcome or payoff it leads to
+· Do not present these as bullet fragments.
+· Make it feel like one flowing explanation that a learner can visualize.
+
+2. Bottom-line essence
+· In 1 sentence, complete this:
+  “Basically, this whole thing is about ______.”
+
+Requirements:
+· Preserve the chain of purposes. Do not flatten the answer into a static description.
+· Write like a strong teacher helping the learner see the whole arc at once.
+· Prefer ordinary, visual, cause-and-effect language.
+· If the concept is not actor-driven, still explain it as a chain from starting condition to final significance.
+· Do not over-focus on technical details.
+· Do not strip away the final stake or the reason the concept matters.
+· The goal is to leave the learner thinking:
+  “Now I can see the whole thing happening from beginning to end.”

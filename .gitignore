@@ -1,0 +1,32 @@
+# -----------------------------
+# Python
+# -----------------------------
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# -----------------------------
+# Environment / secrets
+# -----------------------------
+.env
+
+# -----------------------------
+# Generated outputs
+# -----------------------------
+output/
+logs/
+src/notebooklm_automation.egg-info/
+.notebooklm_state/
+
+# -----------------------------
+# Editor / OS noise
+# -----------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

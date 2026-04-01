@@ -1,0 +1,13 @@
+Using only the selected sources, give me 3 short non-examples or near-miss cases for [Concept Name].
+
+Structure the answer exactly like this:
+Near-miss case
+Why it is NOT actually [Concept Name]
+What makes it deceptively close
+
+Requirements:
+Prefer cases that are easy to confuse with the concept.
+Do not use absurd or unrelated non-examples.
+The goal is to sharpen the boundary through contrast.
+Keep each case short and technically clean.
+Use near-misses that differ specifically on the defining condition, not merely on degree, consequence, context, or surface appearance.
