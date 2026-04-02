@@ -521,7 +521,7 @@ TUTOR_JS = r"""
     let crossEnabled    = false;
     let streaming       = false;
     let mastery         = null;
-    let speed = 'fast';   // 'fast' | 'slow'
+    let speed = 'fast';   // 'fast' | 'accurate'
     let wasMinimized = false;
 
     const MODELS = { fast: 'deepseek-r1:1.5b', accurate: 'deepseek-r1:8b' };
@@ -673,7 +673,7 @@ TUTOR_JS = r"""
                         '</div>' +
                         '<div id="tutor-speed-row">' +
                             '<button class="speed-btn active" id="speed-fast" data-speed="fast">⚡ Fast</button>' +
-                            '<button class="speed-btn" id="speed-slow" data-speed="slow">🧠 Accurate</button>' +
+                            '<button class="speed-btn" id="speed-slow" data-speed="accurate">🧠 Accurate</button>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +

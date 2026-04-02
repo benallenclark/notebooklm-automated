@@ -1266,8 +1266,6 @@ class Launcher(tk.Tk):
             self._hub_title.get(),
             "--tutor-port",
             str(self._port.get()),
-            "--concepts-csv",
-            str(Path(self._nlm_root.get()) / "data" / "concepts.csv"),
         ]
 
         def run() -> None:
