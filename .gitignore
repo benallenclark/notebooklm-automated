@@ -23,6 +23,7 @@ logs/
 src/notebooklm_automation.egg-info/
 .notebooklm_state/
 study_hub/
+src/notebooklm_automation/tutor_state.db
 
 # -----------------------------
 # Editor / OS noise
