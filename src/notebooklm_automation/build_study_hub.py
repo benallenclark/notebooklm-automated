@@ -1311,16 +1311,17 @@ def build_concept_page(
 
 
 def sort_entries(entries: list[dict[str, str]], order: list[str]) -> list[dict[str, str]]:
-    idx = {s.strip(): i for i, s in enumerate(order) if s.strip()}
-    pinned, rest = [], []
-    for e in entries:
-        if e["stem"] in idx:
-            pinned.append((idx[e["stem"]], e))
-        else:
-            rest.append(e)
-    pinned.sort(key=lambda x: x[0])
-    rest.sort(key=lambda x: x["title"].lower())
-    return [e for _, e in pinned] + rest
+    """Sort by numeric filename prefix (01_, 02_ …) if present, else alphabetically."""
+
+    def sort_key(e: dict) -> tuple:
+        stem = e["stem"]
+        # Extract leading digits before first underscore
+        part = stem.split("_")[0]
+        if part.isdigit():
+            return (0, int(part), stem)
+        return (1, 0, stem)  # no prefix → sort alphabetically after prefixed entries
+
+    return sorted(entries, key=sort_key)
 
 
 # ── Main build ─────────────────────────────────────────────────────────────────
@@ -1336,16 +1337,6 @@ def build_site(
     md_files = sorted(input_dir.glob("*.md"))
     if not md_files:
         raise FileNotFoundError(f"No .md files found in: {input_dir}")
-
-    # Validate ordered_concepts
-    if ordered_concepts:
-        available = {p.stem for p in md_files}
-        missing = [s for s in ordered_concepts if s not in available]
-        if missing:
-            raise ValueError(
-                "ordered_concepts contains stems with no matching .md file:\n"
-                + "\n".join(f"  - {s}" for s in missing)
-            )
 
     site_dir.mkdir(parents=True, exist_ok=True)
     raw_dir = site_dir / "raw"
@@ -1392,7 +1383,7 @@ def build_site(
             }
         )
 
-    entries = sort_entries(entries, ordered_concepts)
+    entries = sort_entries(entries, [])
     index_html = build_index_page(title, entries)
     (site_dir / "index.html").write_text(index_html, encoding="utf-8")
 
@@ -1405,9 +1396,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--input", default="output", help="Directory of .md files")
     p.add_argument("--site-dir", default="study_hub", help="Output directory")
     p.add_argument("--title", default="NotebookLM Study Hub", help="Hub page title")
-    p.add_argument(
-        "--tutor-port", default=8000, type=int, help="tutor_server.py port (default 8000)"
-    )
+    p.add_argument("--tutor-port", default=8000, type=int, help="tutor_server.py port")
     p.add_argument("--no-tutor", action="store_true", help="Disable AI tutor sidebar")
     return p.parse_args()
 

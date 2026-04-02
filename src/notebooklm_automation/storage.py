@@ -21,14 +21,10 @@ def slugify(value: str) -> str:
     return slug.strip("_")
 
 
-def build_concept_output_path(output_dir: Path, concept: Concept) -> Path:
-    """
-    Return the single markdown file path for one concept.
-    Example:
-        output/cia_triad.md
-    """
+def build_concept_output_path(output_dir: Path, concept: Concept, position: int = 0) -> Path:
     output_dir.mkdir(parents=True, exist_ok=True)
-    return output_dir / f"{slugify(concept.name)}.md"
+    prefix = f"{position:02d}_" if position > 0 else ""
+    return output_dir / f"{prefix}{slugify(concept.name)}.md"
 
 
 # -----------------------------

@@ -91,7 +91,9 @@ class StudyBatchRunner:
         total_concepts: int,
         total_prompts: int,
     ) -> None:
-        concept_output_path = build_concept_output_path(self.config.output_dir, concept)
+        concept_output_path = build_concept_output_path(
+            self.config.output_dir, concept, concept_index
+        )
 
         if concept_output_path.exists() and not overwrite:
             self.logger.info(
