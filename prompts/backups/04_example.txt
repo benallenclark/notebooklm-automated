@@ -1,28 +1,15 @@
-Assume the previous sections have already been read.
-Do not add any unlabeled opening or scene-setting sentence before the required sections.
-Return only the requested headings and content.
-Do not insert any unlabeled sentence before, between, or after them.
-
-Assume the reader already knows what the concept is and how it works. Do not redefine it before the example.
-Use the example to make the mechanism visible, not to re-summarize the concept.
-
 Using only the selected sources, give me one concrete example that makes [Concept Name] click for first-pass learning.
 
 Important constraint:
 Choose a single, beginner-friendly concrete case.
 This may be a real-world example, a minimal toy case, or a simple thought experiment, whichever reveals the concept most clearly and truthfully. If the concept has multiple parts, the example must show all of them if at all possible.
 Do NOT explain the concept through advanced formal systems, specialized subframeworks, or nearby course machinery unless there is no simpler truthful option.
-
 Structure the answer exactly like this:
-· In exactly 1 sentence, tell me what the scenario is and what part of the concept it is meant to make visible.
-· Make me immediately know what I am about to look at.
-· Do not use filler like “this example shows,” “let’s look at,” or “to make this clear.”
-
-Step by step walkthrough
+The example
+Walk me through it step by step
 Show exactly where [Concept Name] appears in the example
 Explain why this example fits the concept
 Give one common misunderstanding someone might have when looking at this example
-
 Requirements:
 Prefer a single ordinary real-world system or situation.
 If the concept has multiple parts, prefer a single example that naturally reveals the important parts. Do not force multiple separate mini-cases into one answer just to cover everything.
@@ -30,16 +17,9 @@ Explain each part using the most general beginner-friendly meaning first.
 Keep the example concrete, complete, and easy to follow.
 Do not overload the example with extra frameworks or special-case rules.
 In section 5, prefer a misunderstanding that helps the learner grasp the whole concept more clearly, not just one sub-part.
+In section 3, point to the exact place the concept shows up. In section 4, explain the match at the concept level. Do not repeat section 3 in different words.
 Use one coherent scenario, not multiple separate mini-cases inside the same system.
 If the concept has multiple core manifestations, prefer a single scenario that naturally reveals them, but do not stitch together separate subexamples just to force completeness.
 Prefer an example that makes the concept easy to see directly, not one that is memorable mainly because of surrounding context or consequences.
-In section 4, explain the general concept-level pattern that makes the example fit, not the whole concept again.
-Do not simply restate the exact moments from section 3.
-Section 3 should point to the exact location of the concept in the example.
-Do not use the example to launch subtype distinctions, organizational distinctions, or surrounding workflow distinctions.
-· After the misunderstanding section, write exactly 1 unlabeled transition sentence that points to the next section.
-· Use this form: “Now that X is visible, the next step is to Y because Z.”
-· X = what the example made concrete
-· Y = either checking whether an extra dynamic/formal lens is needed or clarifying the exact boundary
-· Z = why that next step is needed
-· Do not label it.
+In section 4, explain the general concept-level pattern that makes the example fit. Do not simply restate the exact moments from section 3.
+Section 3 should point to the exact location of the concept in the example. Section 4 should explain the general pattern that makes it a match. Do not restate section 3.

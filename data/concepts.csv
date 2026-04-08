@@ -1,5 +1,5 @@
 concept
-Software Development Lifecycle
+Software Development Lifecycle sdlc
 Predictive Development Models
 Adaptive Development Models
 Spiral Model
@@ -8,7 +8,12 @@ Threat Modeling
 Verification
 Validation
 Functional Testing
+Unit Testing
+Integration Testing
+Regression Testing
 Security Testing
 Static Application Security Testing SAST
 Dynamic Application Security Testing DAST
 Software Composition Analysis SCA
+Manual Security Testing
+CI/CD Pipeline Security Integration

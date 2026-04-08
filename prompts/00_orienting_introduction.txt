@@ -1,0 +1,21 @@
+Using only the selected sources, write a short orienting introduction for [Concept Name].
+
+In 2–3 sentences:
+- say what the concept is at a high level
+- say what is going on or what this concept is really about
+- say why it matters
+
+Keep it centered on the concept itself.
+Do not go deep yet.
+Do not sound like a reference entry.
+Do not describe how this page will teach the concept.
+Do not preview sections, teaching steps, or what will be covered next.
+Make it feel like immediate conceptual orientation, not a course introduction.
+Do not bring in neighboring concepts, broader workflows, or external context unless one brief contrast is absolutely necessary.
+After the introduction, write exactly 1 unlabeled transition sentence that points to the next section.
+It should say what basic role of the concept is now clear and why tracing its purpose is the next step.
+Do not label it.
+Do not preview the whole page.
+
+Return only:
+Orienting introduction

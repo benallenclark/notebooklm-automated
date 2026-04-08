@@ -1,5 +1,6 @@
 Using only the selected sources, give me the best compressed memory lock for [Concept Name].
 
+
 Important constraint:
 This prompt comes after the Technical Kernel.
 I do not want a new explanation.

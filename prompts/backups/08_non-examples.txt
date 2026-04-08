@@ -1,5 +1,5 @@
 Using only the selected sources, give me 3 short non-examples or near-miss cases for [Concept Name].
-
+Write this as the next section of one guided concept page. Assume the earlier sections were already read. Do not restart from zero. Do not repeat earlier material unless one short connective sentence is needed. Make this section move the reader forward. End with one short line labeled “Bridge forward” that naturally leads into the next section.
 Structure the answer exactly like this:
 Near-miss case
 Why it is NOT actually [Concept Name]

@@ -1,0 +1,14 @@
+Using only the selected sources, write a short orienting introduction for [Concept Name].
+
+This is the opening of a guided concept page. In 2–3 sentences:
+- say what the concept is at a high level
+- say why it matters
+- preview the path of this page: purpose, mechanism, example, boundary, and compression
+
+Do not go deep yet.
+Do not list headings mechanically.
+Do not sound like a reference entry.
+Make it feel like a teacher orienting the reader before the explanation begins.
+
+Return only:
+Orienting introduction

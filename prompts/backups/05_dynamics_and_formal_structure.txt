@@ -1,0 +1,42 @@
+Using only the selected sources, decide whether [Concept Name] must be understood through any of these lenses to be learned correctly:
+process / sequence
+change over time / state change
+math / formal relationships
+proof / derivation
+algorithmic execution / protocol flow
+tradeoffs under changing conditions
+Do not force any lens onto the concept if it is not actually central.
+I want to know whether this concept is mainly static, or whether it has a dynamic, procedural, mathematical, state-based, or tradeoff side that I must understand.
+
+Output rule:
+If none	 of these lenses are central, return only:
+Applicability verdict
+What I should focus on instead
+If one or more lenses are central, return:
+Applicability verdict
+Which lenses are actually central
+What I would miss if I ignored those lenses
+Beginner-friendly walkthrough of the relevant lens or lenses
+What I should focus on first
+
+Requirements:
+Start by saying whether these lenses are central, somewhat relevant, or not really applicable.
+If not applicable, keep the answer short, lean, and unpadded.
+If applicable, explain only the lenses that truly matter.
+Use plain English and optimize for first-pass learning.
+Do not re-explain the whole concept from scratch; explain only the extra dynamic/formal side a static understanding would miss.
+If the concept is already fully understandable as a static concept, say so briefly and stop.
+If the concept is a named process or workflow, explain its general order directly; distinguish the process itself from any tools used within it.
+In the short format, section 2 should redirect me to the right mode of understanding, not summarize the whole concept.
+When relevant:
+For process/sequence: explain what happens first, next, and why order matters.
+For change over time: explain what changes, what causes it, and key states/phases.
+For math/formal relationships: explain the key quantities/relationships and what they mean in plain English.
+For proof/derivation: explain what is being shown, why it matters, and the core idea.
+For algorithm/protocol flow: explain inputs, major steps, output/end state, and where misunderstanding happens.
+For tradeoffs: explain what is being balanced, what improves, what gets worse, and what changes the balance.
+Do not restate the concept’s type or identity here. Only explain the extra dynamic, procedural, mathematical, or state-based understanding that a static definition would miss.
+In section 4, clearly separate the minimum dynamic pattern required by the concept from common but non-essential later developments, applications, or consequences.
+Do not mention agent intentions, implementation payloads, dramatic outcomes, or downstream effects unless those are required for the concept itself.
+Do not let a common sequence example harden into a defining condition if it is only one common manifestation.
+If the concept is mainly static, do not retrofit motion, sequence, or changing states into it just to make the answer feel richer.
