@@ -1131,6 +1131,7 @@ def markdown_to_html(md_text: str) -> str:
         list_match = re.match(r"^[-*·]\s+(.*)$", stripped)
         if list_match:
             flush_paragraph()
+            flush_ol()
             list_buffer.append(list_match.group(1))
             continue
 

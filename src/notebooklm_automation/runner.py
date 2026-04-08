@@ -134,7 +134,6 @@ class StudyBatchRunner:
                         prompt.title,
                         attempt,
                         total_attempts,
-                        retries_left,
                     )
 
                     started = time.perf_counter()
