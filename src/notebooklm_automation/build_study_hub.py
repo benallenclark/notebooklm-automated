@@ -24,6 +24,48 @@ import shutil
 from pathlib import Path
 
 
+def strip_source_references(text: str) -> str:
+    """Remove bracketed source citations like [1], [2, 3], [1-5] from text."""
+    return re.sub(r"\s*\[[\d,\s\-]+\]", "", text)
+
+
+def format_section_labels(text: str) -> str:
+    """Detect plain-text label lines and wrap them in ** so the parser treats them as headings."""
+    lines = text.split("\n")
+    result = []
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        # Skip lines that are already formatted, empty, or clearly not labels
+        if (
+            not stripped
+            or stripped == "---"
+            or stripped.startswith("#")
+            or stripped.startswith("**")
+            or re.match(r"^[-*·]\s", stripped)
+            or re.match(r"^\d+\.\s", stripped)
+            or stripped.startswith("```")
+            or stripped.endswith(".")
+            or stripped.endswith(":")
+            or not stripped[0].isupper()
+        ):
+            result.append(line)
+            continue
+
+        # Look ahead for a non-blank line (label must have content after it)
+        next_stripped = ""
+        for j in range(i + 1, len(lines)):
+            if lines[j].strip():
+                next_stripped = lines[j].strip()
+                break
+
+        if next_stripped and len(stripped) < 120:
+            result.append(f"**{stripped}**")
+        else:
+            result.append(line)
+
+    return "\n".join(result)
+
+
 # ── Ordering ───────────────────────────────────────────────────────────────────
 ordered_concepts: list[str] = [
     # "your_file_stem_here",
@@ -1021,6 +1063,7 @@ def markdown_to_html(md_text: str) -> str:
     parts: list[str] = []
     paragraph_buffer: list[str] = []
     list_buffer: list[str] = []
+    ol_buffer: list[str] = []
 
     def flush_paragraph() -> None:
         if paragraph_buffer:
@@ -1035,6 +1078,22 @@ def markdown_to_html(md_text: str) -> str:
             parts.append(f"<ul>\n{items}\n</ul>")
             list_buffer.clear()
 
+    def flush_ol() -> None:
+        if not ol_buffer:
+            return
+        if len(ol_buffer) == 1:
+            # Single numbered line = bold heading
+            num, text = ol_buffer[0]
+            parts.append(
+                f'<p class="section-label"><strong>{num}. {inline_markdown(text)}</strong></p>'
+            )
+        else:
+            # Consecutive numbered lines = ordered list
+            start = ol_buffer[0][0]
+            items = "\n".join(f"<li>{inline_markdown(text)}</li>" for _, text in ol_buffer)
+            parts.append(f'<ol start="{start}">\n{items}\n</ol>')
+        ol_buffer.clear()
+
     for raw_line in lines:
         line = raw_line.rstrip()
         stripped = line.strip()
@@ -1042,25 +1101,30 @@ def markdown_to_html(md_text: str) -> str:
         if not stripped:
             flush_paragraph()
             flush_list()
+            flush_ol()
             continue
         if stripped == "---":
             flush_paragraph()
             flush_list()
+            flush_ol()
             parts.append("<hr>")
             continue
         if stripped.startswith("### "):
             flush_paragraph()
             flush_list()
+            flush_ol()
             parts.append(f"<h3>{inline_markdown(stripped[4:])}</h3>")
             continue
         if stripped.startswith("## "):
             flush_paragraph()
             flush_list()
+            flush_ol()
             parts.append(f"<h2>{inline_markdown(stripped[3:])}</h2>")
             continue
         if stripped.startswith("# "):
             flush_paragraph()
             flush_list()
+            flush_ol()
             parts.append(f"<h1>{inline_markdown(stripped[2:])}</h1>")
             continue
 
@@ -1070,11 +1134,30 @@ def markdown_to_html(md_text: str) -> str:
             list_buffer.append(list_match.group(1))
             continue
 
+        bold_heading = re.match(r"^\*\*(.+?)\*\*\s*$", stripped)
+        if bold_heading:
+            flush_paragraph()
+            flush_list()
+            flush_ol()
+            parts.append(
+                f'<p class="section-label"><strong>{inline_markdown(bold_heading.group(1))}</strong></p>'
+            )
+            continue
+
+        ol_match = re.match(r"^(\d+)\.\s+(.+)$", stripped)
+        if ol_match:
+            flush_paragraph()
+            flush_list()
+            ol_buffer.append((ol_match.group(1), ol_match.group(2)))
+            continue
+
         flush_list()
+        flush_ol()
         paragraph_buffer.append(stripped)
 
     flush_paragraph()
     flush_list()
+    flush_ol()
     return "\n".join(parts)
 
 
@@ -1103,6 +1186,8 @@ def base_html(title: str, body: str, extra_head: str = "") -> str:
       --link: #9ec5ff;
       --accent: #6aa6ff;
       --accent-2: #84b8ff;
+      --heading: #6aa6ff;
+      --bold: #e2b86b;
       --shadow: 0 10px 30px rgba(0,0,0,.25);
       --done-bg: #0e2a1a;
       --done-border: #1e5c35;
@@ -1115,6 +1200,8 @@ def base_html(title: str, body: str, extra_head: str = "") -> str:
         --link: #0b61ff; --accent: #0b61ff; --accent-2: #2a73ff;
         --shadow: 0 12px 28px rgba(19,35,68,.08);
         --done-bg: #edfbf3; --done-border: #6ee8a0; --done-text: #1a6b3a;
+        --heading: #0b61ff;
+        --bold: #8a6115;
       }}
     }}
     * {{ box-sizing: border-box; }}
@@ -1140,9 +1227,12 @@ def base_html(title: str, body: str, extra_head: str = "") -> str:
     .raw-btn {{ color: var(--text); background: var(--surface-2); border: 1px solid var(--border); }}
     .meta {{ color: var(--muted); font-size: .95rem; margin-bottom: 18px; }}
     h1, h2, h3 {{ line-height: 1.2; margin-top: 1.4em; margin-bottom: .6em; }}
-    h1 {{ font-size: 2rem; margin-top: 0; }}
-    h2 {{ font-size: 1.35rem; padding-top: .35rem; border-top: 1px solid var(--border); }}
-    h3 {{ font-size: 1.05rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }}
+    h1 {{ font-size: 2rem; margin-top: 0; color: var(--heading); }}
+    h2 {{ font-size: 1.35rem; padding-top: .35rem; border-top: 1px solid var(--border); color: var(--heading); }}
+    h3 {{ font-size: 1.05rem; color: var(--heading); text-transform: uppercase; letter-spacing: .04em; opacity: .8; }}
+    strong {{ color: var(--bold); }}
+    .section-label {{ margin-bottom: .2em; }}
+    .section-label strong {{ color: var(--heading); font-size: 1.05em; }}
     p, ul {{ margin: .8em 0; }} ul {{ padding-left: 1.35rem; }} li {{ margin: .35em 0; }}
     hr {{ border: 0; border-top: 1px solid var(--border); margin: 1.5rem 0; }}
     code {{
@@ -1361,7 +1451,7 @@ def build_site(
 
         shutil.copy2(md_path, raw_dir / md_path.name)
 
-        concept_html = markdown_to_html(raw_text)
+        concept_html = markdown_to_html(format_section_labels(strip_source_references(raw_text)))
         concept_page = build_concept_page(
             hub_title=title,
             entry_title=entry_title,

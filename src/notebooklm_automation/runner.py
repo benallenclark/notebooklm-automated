@@ -125,7 +125,7 @@ class StudyBatchRunner:
 
                 try:
                     self.logger.info(
-                        "[Concept %s/%s] %s | [Prompt %s/%s] %s | attempt %s/%s | retries left: %s",
+                        "[Concept %s/%s] %s | [Prompt %s/%s] %s | attempt %s/%s",
                         concept_index,
                         total_concepts,
                         concept.name,
