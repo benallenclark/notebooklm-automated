@@ -1,7 +1,7 @@
 Assume the previous sections have already been read.
-Do not add any unlabeled opening or scene-setting sentence before the required sections.
-Return only the requested headings and content.
-Do not insert any unlabeled sentence before, between, or after them.
+Return only the requested headings and content, plus exactly 1 unlabeled closing transition sentence after the last required section.
+Do not insert any other unlabeled sentence before, between, or after them.
+The opening scenario sentence already serves as the opening orientation; do not add another opening transition.
 
 Assume the reader already knows what the concept is and how it works. Do not redefine it before the example.
 Use the example to make the mechanism visible, not to re-summarize the concept.
@@ -40,6 +40,7 @@ Do not use the example to launch subtype distinctions, organizational distinctio
 · After the misunderstanding section, write exactly 1 unlabeled transition sentence that points to the next section.
 · Use this form: “Now that X is visible, the next step is to Y because Z.”
 · X = what the example made concrete
-· Y = either checking whether an extra dynamic/formal lens is needed or clarifying the exact boundary
+· Y = checking whether any extra dynamic, procedural, mathematical, algorithmic, tradeoff, or state-based lens is needed
 · Z = why that next step is needed
 · Do not label it.
+· Do not use this transition to preview nearby distinctions, tools, implementations, or broader frameworks.

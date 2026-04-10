@@ -1,7 +1,9 @@
 Assume previous sections were already read.
-Return only the requested headings and content, plus exactly 1 unlabeled transition sentence before section 1 and exactly 1 unlabeled transition sentence after the last required section.
+Return only the requested headings and content, plus exactly 1 unlabeled opening transition sentence before section 1 and exactly 1 unlabeled closing transition sentence after the last required section.
 The opening transition must connect from the previous section by saying what is now clear and why mechanism is the next step.
-The closing transition must point to the example section using “Now that X is clear, the next step is to Y because Z.”
+Keep the opening transition at the level of this concept itself, not the broader discipline, lifecycle, tool family, or surrounding system.
+The closing transition must use “Now that X is clear, the next step is to Y because Z.”
+Y must be a concrete example of this concept, not a named tool, framework, implementation, or workflow.
 Do not label either sentence.
 
 Using only the selected sources, teach me what [Concept Name] is now that I already understand why it matters, what larger purpose it serves, and what it is really about at a big-picture level.

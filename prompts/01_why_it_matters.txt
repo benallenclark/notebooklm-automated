@@ -45,9 +45,11 @@ Requirements:
 · Do not invent motives that are not supported or strongly implied.
 · The goal is to make me feel:
 “Now I know not just what this concept does, but what it is ultimately in service of.”
-· After section 6, write exactly 1 unlabeled transition sentence that points to the next section (overall significance, big-picture story, and bottom-line essense).
+· After section 6, write exactly 1 unlabeled transition sentence that points only to the next section.
 · Use this form: “Now that X is clear, the next step is to Y because Z.”
 · X = the purpose chain or final stake this section clarified
-· Y = the big-picture story the next section will tell
+· Y = the big-picture story the next section will tell about this concept
 · Z = why that story is the natural next step
 · Do not label it.
+· Keep the transition at the level of this concept itself.
+· Do not mention broader systems, surrounding workflows, named strategies, or neighboring techniques unless section 6 made them unavoidable.

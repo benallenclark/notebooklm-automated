@@ -1,7 +1,10 @@
 Assume previous sections were already read.
 Return only the headings allowed by the relevant output branch, plus exactly 1 unlabeled transition sentence before the first heading and exactly 1 unlabeled transition sentence after the last heading.
-The opening transition must connect from the example by saying what is now visible and why this section asks whether any extra lens is needed.
-The closing transition must point to the next section (exact technical core, necessary conditions, what's not required, and technical boundary)  using “Now that X is clear, the next step is to Y because Z.”
+The opening transition must connect from the example by saying what is now visible and why checking for any extra lens is the next step.
+Keep it conceptual, not procedural.
+The closing transition must point to the next section using “Now that X is clear, the next step is to Y because Z.”
+Y = the exact technical core and boundary of the concept
+Do not list subsection names or procedural items in the transition.
 Do not label either sentence.
 
 Assume the concept’s basic meaning is already clear from earlier sections and the example. This section exists only to decide whether an extra dynamic, procedural, mathematical, state-based, algorithmic, or tradeoff lens is needed. If not, redirect forward instead of re-summarizing the concept.
@@ -24,7 +27,7 @@ What exact boundary I should lock in next
 If one or more lenses are central, return:
 Applicability verdict
 Which lenses are actually central
-If you ignored these lenses
+What I would miss if I ignored those lenses
 Beginner-friendly walkthrough of the relevant lens or lenses
 What I should focus on first
 

@@ -6,6 +6,7 @@ Using only the selected sources, give me the most technically accurate and sharp
 This is the exactness pass, not a beginner explanation.
 Before “Why precision matters,” write exactly 1 unlabeled transition sentence that connects from the previous section.
 It must say what is now clear and why exactness is the next step.
+Keep this at the level of classification and boundary, not broader strategy, surrounding workflows, or tool families.
 It must add conceptual value, not lesson narration.
 
 Structure the answer exactly like this:
@@ -51,6 +52,7 @@ Requirements:
 - After section 6, write exactly 1 unlabeled transition sentence that points to the next section (non-examples, near-miss cases, and concepts that are confusingly close).
 - Use this form: “Now that X is clear, the next step is to Y because Z.”
 - X = what this section pinned down
-- Y = the near-miss contrast section
-- Z = why the exact boundary still needs to be pressure-tested
+- Y = near-miss contrast
+- Z = why the exact boundary still needs to be pressure-tested against confusingly close cases
+- Do not name specific near-miss cases in the transition.
 - Do not label it.

@@ -1,5 +1,6 @@
 Before section 1, write exactly 1 unlabeled transition sentence that connects from the previous section.
 It must say what is now clear from the purpose chain and why a story is the next step.
+It must justify why a story is needed, not why an example is needed.
 Do not redefine the concept.
 Assume the purpose chain is already established. Do not repeat it point by point. Turn it into one flowing story.
 Use the first sentence to pick up from the need or stake already established, not to redefine the concept.
@@ -44,9 +45,11 @@ Requirements:
 · Do not strip away the final stake or the reason the concept matters.
 · The goal is to leave the learner thinking:
   “Now I can see the whole thing happening from beginning to end.”
-· After section 2, write exactly 1 unlabeled transition sentence that points to the next section (identity and function, how it works, why it works, and a first principles breakdown).
+· After section 2, write exactly 1 unlabeled transition sentence that points only to the next section.
 · Use this form: “Now that X is clear, the next step is to Y because Z.”
 · X = the story this section made visible
 · Y = the concept’s core working logic
 · Z = why the mechanism now needs to be made explicit
 · Do not label it.
+· Do not name tools, implementations, subtypes, or surrounding systems in the transition.
+· Keep the handoff focused on core working logic only.

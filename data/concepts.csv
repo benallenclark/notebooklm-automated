@@ -17,3 +17,7 @@ Dynamic Application Security Testing DAST
 Software Composition Analysis SCA
 Manual Security Testing
 CI/CD Pipeline Security Integration
+Fuzzing
+Black-Box Fuzzing
+Coverage-Guided Greybox Fuzzing
+Sanitizers

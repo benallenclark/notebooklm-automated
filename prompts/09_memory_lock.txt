@@ -43,3 +43,5 @@ Requirements:
 · It should leave the learner with a clean final sense of what matters and what to remember.
 · Keep it short, reflective, and compressive.
 · The capstone may summarize significance or memory value, but it must not reopen boundary analysis, mechanism, or examples.
+· The capstone should sound like a final carry-forward reminder, not a resumed explanation.
+· Prefer one strong takeaway over multiple reflective claims.

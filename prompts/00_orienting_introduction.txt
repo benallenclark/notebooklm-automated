@@ -13,7 +13,11 @@ Do not preview sections, teaching steps, or what will be covered next.
 Make it feel like immediate conceptual orientation, not a course introduction.
 Do not bring in neighboring concepts, broader workflows, or external context unless one brief contrast is absolutely necessary.
 After the introduction, write exactly 1 unlabeled transition sentence that points to the next section.
-It should say what basic role of the concept is now clear and why tracing its purpose is the next step.
+It should say what the concept basically does and why tracing its purpose is the next step.
+Keep the transition at the level of this concept itself.
+Do not mention broader disciplines, surrounding workflows, tool families, or neighboring techniques.
+Keep the transition at the level of this concept itself.
+Do not mention broader value systems, surrounding workflows, or neighboring techniques.
 Do not label it.
 Do not preview the whole page.
 
