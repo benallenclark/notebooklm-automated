@@ -1,0 +1,24 @@
+Assume the previous sections have already been read.
+Return only the requested headings and content, plus exactly 1 unlabeled transition sentence before section 1 and exactly 1 unlabeled transition sentence after the last required section.
+
+Assume the reader has already seen several near-miss cases. Do not repeat them. Collapse the remaining confusion to the single nearest whole-concept rival.
+
+Using only the selected sources, tell me what [Concept Name] as a whole is most likely to be confused with, and draw the sharpest boundary.
+
+Structure the answer exactly like this:
+
+1. The nearest whole-concept confusion
+2. Why students might blur them together
+3. [Concept Name] is mainly about...
+4. [Most Likely Confused Concept] is mainly about...
+5. Sharpest boundary in one sentence
+6. Easy memory hook
+7. One easy trap or wrong answer to avoid
+
+Requirements:
+· Focus on the full concept, not one small internal part.
+· Keep the contrast short, sharp, and memorable.
+· For this notebook, choose the rival that would most likely cause the most damaging mistake in real computation, modeling, or interpretation.
+· Explain the confusion mainly in terms of purpose, access mode, structure, trigger, or defining condition.
+· The closing transition must point to the memory lock using:
+“Now that X is clear, the final step is to Y because Z.”

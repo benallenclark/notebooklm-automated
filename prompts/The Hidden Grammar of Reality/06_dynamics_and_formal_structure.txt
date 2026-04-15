@@ -1,0 +1,34 @@
+Assume previous sections were already read.
+Return only the headings allowed by the relevant output branch, plus exactly 1 unlabeled transition sentence before the first heading and exactly 1 unlabeled transition sentence after the last heading.
+
+Assume the concept’s basic meaning is already clear from earlier sections and the example. This section exists only to decide whether an extra dynamic, procedural, mathematical, state-based, algorithmic, proof, or tradeoff lens is needed.
+
+Using only the selected sources, decide whether [Concept Name] must be understood through any of these lenses:
+process / sequence
+change over time / state change
+math / formal relationships
+proof / derivation
+algorithmic execution / protocol flow
+tradeoffs under changing conditions
+
+Do not force any lens onto the concept if it is not central.
+
+Output rule:
+If none of these lenses are central, return only:
+Applicability verdict
+What exact boundary I should lock in next
+
+If one or more lenses are central, return:
+Applicability verdict
+Which lenses are actually central
+What I would miss if I ignored those lenses
+Beginner-friendly walkthrough of the relevant lens or lenses
+What I should focus on first
+
+Requirements:
+- Start by saying whether these lenses are central, somewhat relevant, or not really applicable.
+- For math concepts, do not avoid the formal side if it is genuinely central.
+- Explain only the extra dynamic/formal side a static understanding would miss.
+- When relevant, explain key quantities, relationships, state changes, proof ideas, algorithmic flow, or tradeoffs in plain English.
+- For this notebook, optimize for the minimum formal lens required for real understanding, not maximal rigor.
+- The closing transition must use: “Now that X is clear, the next step is to Y because Z.”

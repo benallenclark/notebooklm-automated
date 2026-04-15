@@ -1,0 +1,37 @@
+Using only the selected sources, give me 3 short non-examples or near-miss cases for [Concept Name].
+Assume the technical core is already clear. Do not redefine the concept before each case.
+Order the three near-miss cases from closest confusion to less-close confusion.
+
+Do not add any unlabeled opening or transition sentence.
+Start directly with “Why these are easy to confuse.”
+
+Structure the answer exactly like this:
+
+Why these are easy to confuse
+· In exactly 1 sentence, say what kind of confusion this concept invites and why the next near-miss cases are worth comparing.
+
+Near-miss case 1
+Why it is NOT actually [Concept Name]
+What makes it deceptively close
+
+Near-miss case 2
+Why it is NOT actually [Concept Name]
+What makes it deceptively close
+
+Near-miss case 3
+Why it is NOT actually [Concept Name]
+What makes it deceptively close
+
+Requirements:
+- Prefer cases that are genuinely easy to confuse with the concept.
+- For this notebook, prefer near-misses that would cause real mistakes in code, formulas, modeling, or interpretation.
+- Use near-misses that differ specifically on the defining condition.
+- Keep each case short and technically clean.
+
+For each “What makes it deceptively close” sentence:
+· Write exactly 1 sentence.
+· Use this structure:
+“Both are [shared surface/category], but [Concept Name] is [defining condition], whereas this near-miss is [different condition].”
+
+After Near-miss case 3, write exactly 1 unlabeled transition sentence to the next section using:
+“Now that X is clearer, the next step is to Y because Z.”

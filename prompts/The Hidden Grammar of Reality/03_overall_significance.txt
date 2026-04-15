@@ -1,0 +1,35 @@
+Before section 1, write exactly 1 unlabeled transition sentence that connects from the previous section.
+It must say what is now clear from the purpose chain and why a story is the next step.
+Do not redefine the concept.
+
+Using only the selected sources, turn the already-established purpose chain into a short, plain-English story about [Concept Name].
+
+Important constraint:
+I do not want a static summary.
+I want a short, cohesive story that lets me mentally see:
+- what someone or something is trying to achieve
+- what obstacle or limitation exists
+- how this concept becomes the way through that obstacle
+- what leverage, mechanism, or pattern makes it work
+- what intermediate effect it creates
+- what final outcome or stake it serves
+
+Structure the answer exactly like this:
+
+1. Big-picture story
+· In 4–6 sentences, explain [Concept Name] as one connected story in plain English.
+· For math concepts, the story must include:
+  - the computational consequence of knowing the math
+  - the failure or weakness that appears without the math
+  - the kind of system, model, or code this concept strengthens
+
+2. Bottom-line essence
+· Compress the story into one sentence. Do not redefine the concept from scratch.
+
+Requirements:
+· Preserve the chain of purposes.
+· Prefer ordinary, visual, cause-and-effect language.
+· Do not over-focus on technical details.
+· Do not strip away the final stake.
+· After section 2, write exactly 1 unlabeled transition sentence to the next section using:
+“Now that X is clear, the next step is to Y because Z.”

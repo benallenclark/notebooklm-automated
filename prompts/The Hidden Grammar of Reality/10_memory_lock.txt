@@ -1,0 +1,36 @@
+Before section 1, write exactly 1 unlabeled transition sentence that connects from the previous section.
+It must say what final contrast is now clear and why the concept is ready to be compressed into memory.
+After section 2, write 1–2 unlabeled capstone sentences that close the page.
+
+Assume all explanation and boundary work is now complete. This section closes the page.
+
+Using only the selected sources, give me the best compressed memory lock for [Concept Name].
+
+Structure the answer exactly like this:
+
+1. Shortest truthful explanation
+· Give the shortest truthful explanation of [Concept Name].
+· Keep it short enough to say comfortably from memory.
+· Make it accurate enough for study use.
+· Prefer the defining condition over interesting consequences, examples, or applications.
+
+2. Mental pointer phrase
+· Complete this sentence:
+“When I mentally point at this concept, I am pointing at ______.”
+· Return only the phrase that fills the blank.
+
+After the capstone, add exactly this short appendix format:
+
+Computational meaning
+· Why it matters for computational systems
+· How it appears indirectly in code
+· What I would miss or do poorly without it
+
+Program anchor
+· Where it appears in Berkeley MSSE
+· What it unlocks next
+
+Requirements:
+· Both main sections must preserve the exact technical core.
+· The appendix must be short, concrete, and concept-specific.
+· Do not add any other framing, commentary, or extra sections.

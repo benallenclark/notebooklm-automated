@@ -1,0 +1,49 @@
+Using only `forest_view.md` and `trail_view.md`, write a **single cohesive orientation narrative** for **[Concept Name]**.
+
+This comes before all other concept prompts.
+
+Its job is **not** to explain the concept in depth.
+Its job is to orient me inside the larger mathematical staircase so I immediately feel:
+
+* what whole structure I am inside
+* what layer or region this concept belongs to
+* where I am on the trail
+* what important concepts led up to this point
+* what important concepts or capabilities come next
+* why this stop matters in computational terms
+* what weakness or blind spot would appear later if I skipped it
+
+Important:
+
+* I do **not** want multiple labeled sections
+* I do **not** want a list
+* I do **not** want a rigid template-style output
+* I want one flowing paragraph, or at most two short paragraphs, that read like a guided orientation
+* somewhere naturally in the narrative, explicitly include:
+  **[you are here: [Concept Name]]**
+
+Style target:
+The narrative should feel like a strong map of the climb, in the spirit of:
+“Your mathematical staircase is a blueprint for system design where …”
+But it should continue naturally into where this concept sits in that staircase.
+
+Required movement of the narrative:
+
+1. Start from the **whole forest**: briefly name the full staircase as a connected system
+2. Narrow into the **current region/layer**
+3. Narrow into the **exact stop**: **[you are here: [Concept Name]]**
+4. Naturally weave in what key concepts led into this stop
+5. Naturally weave in what key concepts or capabilities come next
+6. End by making clear why this stop matters and what later weakness would appear if it were skipped
+
+Requirements:
+
+* Keep the focus on **orientation, role, and direction**, not deep explanation
+* Do **not** teach the internal mechanism of the concept yet
+* Do **not** turn this into a concept summary
+* Do **not** use headings unless absolutely necessary
+* Use only the structure in `forest_view.md` and `trail_view.md`
+* Preserve the exact concept name: **[Concept Name]**
+* Prefer a strong, readable narrative over exhaustive completeness
+* The best output should make me feel:
+  “I know what forest I’m in, what trail I’m on, where I am, what came before, what comes next, and why this stop matters before I go deeper.”

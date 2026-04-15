@@ -1,0 +1,39 @@
+Assume the intuitive explanation is already complete. Do not restate motivation, story, or example here.
+This section should sharpen the concept, not broaden it.
+
+Using only the selected sources, give me the most technically accurate and sharply bounded understanding of [Concept Name].
+
+Before “Why precision matters,” write exactly 1 unlabeled transition sentence that connects from the previous section.
+It must say what is now clear and why exactness is the next step.
+
+Structure the answer exactly like this:
+
+Why precision matters
+· In exactly 1 sentence, say what this exactness pass helps the learner judge more accurately: what counts, what does not count, or what overreach to avoid.
+
+1. Exact technical core
+Give the most precise compact statement of what [Concept Name] technically is.
+· For math concepts, state the formal object, relationship, quantity, or structure the concept is really about when possible.
+
+2. Necessary conditions
+State the conditions that must be true for something to genuinely count as [Concept Name].
+
+3. What is NOT required
+State what people often assume is required, but is not actually necessary.
+
+4. Exact trigger / defining condition
+State the precise event, relation, state, rule, or condition that makes the concept become true or applicable.
+If there is no single trigger, say so and give the defining condition instead.
+
+5. Sharp technical boundary
+Explain what this concept includes and excludes at a technical level.
+
+6. Most precise failure of understanding to avoid
+State the single most damaging precision error a student could make.
+
+Requirements:
+- Optimize for technical accuracy, not friendliness.
+- Distinguish what is essential from what is typical or downstream.
+- Use the simplest exact wording available.
+- After section 6, write exactly 1 unlabeled transition sentence to near-miss contrast using:
+“Now that X is clear, the next step is to Y because Z.”

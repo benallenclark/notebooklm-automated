@@ -1,0 +1,40 @@
+Using only the selected sources, continue the explanation by tracing the purpose of [Concept Name] by following its chain of whys from the surface level to the deepest grounded end that the sources support.
+
+Important constraint:
+Do not stop at the first purpose.
+Do not stop at the technical mechanism.
+Do not stop at the system-level outcome if a deeper practical, scientific, or domain-level reason is clearly implied.
+Keep the purpose chain centered on [Concept Name] itself.
+
+Assume the introduction already oriented the concept.
+Before section 1, write exactly 1 unlabeled transition sentence that connects from the introduction.
+It must say what is now clear and why tracing the purpose chain is the next step.
+
+Structure the answer exactly like this:
+
+1. Surface purpose
+· In one plain sentence, say the most immediate purpose of the concept.
+
+2. Why that purpose matters
+· Explain what problem, gap, task, question, or missing ability makes that immediate purpose necessary.
+· For math concepts, explicitly say why this matters for computational systems.
+
+3. Deeper objective underneath it
+· Explain what larger goal, state, outcome, or end is being served underneath the surface purpose.
+· When relevant, name what kinds of programming, modeling, simulation, or data problems this helps solve.
+
+4. Ultimate technical outcome
+· State the final technical, operational, structural, or system-level effect this chain is trying to produce.
+
+5. Final stake / actor motive
+· Explain what achieving that ultimate technical outcome most likely lets the actor, user, system, scientist, or engineer actually gain, avoid, control, or understand.
+
+6. Full purpose ladder in one line
+· Complete this sentence:
+“[Concept Name] matters because it helps with ______, which serves ______, which produces ______, so that ultimately ______.”
+
+Requirements:
+· Section 4 and section 5 must be different.
+· If the sources do not explicitly state the final stake, give the strongest source-grounded likely motive and clearly mark it as an inference.
+· After section 6, write exactly 1 unlabeled transition sentence to the next section using:
+“Now that X is clear, the next step is to Y because Z.”

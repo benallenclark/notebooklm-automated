@@ -1,0 +1,28 @@
+Assume the previous sections have already been read.
+Return only the requested headings and content, plus exactly 1 unlabeled closing transition sentence after the last required section.
+
+Assume the reader already knows what the concept is and how it works. Do not redefine it before the example.
+Use the example to make the mechanism visible, not to re-summarize the concept.
+
+Using only the selected sources, give me one concrete example that makes [Concept Name] click for first-pass learning.
+
+Important constraint:
+Choose a single, beginner-friendly concrete case.
+For this notebook, prefer one very small concrete example that shows the concept in computation, modeling, scientific reasoning, or code whenever truthfully possible.
+
+Structure the answer exactly like this:
+· In exactly 1 sentence, tell me what the scenario is and what part of the concept it is meant to make visible.
+
+Step by step walkthrough
+Show exactly where [Concept Name] appears in the example
+Explain why this example fits the concept
+What someone would likely do poorly here if they did not understand the math
+Give one common misunderstanding someone might have when looking at this example
+
+Requirements:
+· Prefer a single ordinary real-world, computational, or scientific situation.
+· Keep the example concrete, complete, and easy to follow.
+· In the “what someone would likely do poorly” section, explain the failure without the math in a practical way.
+· Do not overload the example with extra frameworks or surrounding workflow distinctions.
+· After the misunderstanding section, write exactly 1 unlabeled transition sentence to the next section using:
+“Now that X is visible, the next step is to Y because Z.”

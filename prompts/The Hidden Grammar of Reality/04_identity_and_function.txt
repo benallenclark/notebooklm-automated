@@ -1,0 +1,40 @@
+Assume previous sections were already read.
+Return only the requested headings and content, plus exactly 1 unlabeled opening transition sentence before section 1 and exactly 1 unlabeled closing transition sentence after the last required section.
+
+Using only the selected sources, teach me what [Concept Name] is now that I already understand why it matters and what larger purpose it serves.
+
+Important constraint:
+This section’s job is mechanism, not motivation. Keep the confusion-prevention part brief; fuller boundary work comes later.
+
+Structure the answer exactly like this:
+
+1. Whole idea in one simple sentence
+· Give the clearest plain-English statement of what the concept is.
+
+2. How it works at a high level
+· In a few sentences, explain how the concept works.
+· For math concepts, include how it appears indirectly in code, computation, or modeling when relevant.
+
+3. Why this mechanism works
+· Explain what basic condition, structure, rule, pattern, or leverage makes this concept able to work at all.
+
+4. First-principles breakdown
+· State what the concept is fundamentally about.
+· List its essential parts, stages, or ingredients in beginner-friendly language.
+
+5. Technical definition
+· Give the more formal, precise definition.
+
+6. One common mix-up to avoid
+· Name the most likely thing a learner could confuse this concept with.
+· Give only the minimum distinction needed.
+
+7. One compact category lock
+· In one short phrase, say what kind of thing this concept is.
+
+Requirements:
+· Start with understandability, then move into exactness.
+· Do not drift back into broad purpose summaries.
+· For math concepts, make the hidden mathematical structure more primary than the programming artifact.
+· After section 7, write exactly 1 unlabeled closing transition sentence to a concrete example using:
+“Now that X is clear, the next step is to Y because Z.”
