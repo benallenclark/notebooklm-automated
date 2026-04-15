@@ -30,11 +30,11 @@ concepts.csv  →  NotebookLM (9 prompts each)  →  01_concept.md … 13_concep
                                                          ↓
                                                build_study_hub.py
                                                          ↓
-                                               study_hub/index.html
+                                               output/<notebook>/index.html
                                                + AI tutor sidebar (DeepSeek-R1)
 ```
 
-1. **NotebookLM automation** — reads your `data/concepts.csv`, runs a set of structured prompts against each concept in your NotebookLM notebook, and saves one numbered Markdown file per concept to `output/`.
+1. **NotebookLM automation** — reads the active notebook folder's `concepts.csv`, runs a selected set of structured prompts against each concept in your NotebookLM notebook, and saves one numbered Markdown file per concept to that same notebook folder (by default `output/`, or a course folder such as `output/csci 372/`).
 2. **Study hub builder** — converts those Markdown files into a polished HTML site with checkboxes, a progress bar, and per-concept pages.
 3. **AI tutor** — a local FastAPI server + sidebar injected into every concept page, backed by DeepSeek-R1 running in Ollama. Supports Professor, Socratic, Quiz, Boundary, and Diagnose modes with per-concept mastery tracking.
 
@@ -163,14 +163,17 @@ Then open `.env` and fill in your values:
 # Found in the URL: notebooklm.google.com/notebooklm#?authuser=0&source=...
 DEFAULT_NOTEBOOK_ID=your-notebook-id-here
 
+# Optional default source IDs (comma or newline separated)
+SOURCE_IDS=
+
 # Path where Playwright saves your login session (do not change unless necessary)
 AUTH_STORAGE_PATH=.notebooklm_state/storage_state.json
 
 # Path to your concepts CSV file
-CONCEPTS_CSV=data/concepts.csv
+CONCEPTS_CSV=output/concepts.csv
 
 # Path to your prompt templates folder
-PROMPTS_DIR=prompts
+PROMPTS_DIR=prompts/default
 
 # Where generated Markdown files are saved
 OUTPUT_DIR=output
@@ -187,7 +190,9 @@ DELAY_SECONDS=2.0
 
 ### concepts.csv format
 
-Your `data/concepts.csv` file must have a `concept` header column. One concept per row:
+Each notebook folder keeps its own `concepts.csv`. By default that means `output/concepts.csv`, and if you use a course folder such as `output/csci 372/`, the concepts file becomes `output/csci 372/concepts.csv`.
+
+Your `concepts.csv` file must have a `concept` header column. One concept per row:
 
 ```csv
 concept
@@ -218,15 +223,53 @@ A **setup wizard** appears on first launch (or whenever the venv path or project
 
 These settings are saved to `launcher_settings.json` next to the launcher and are remembered on every subsequent launch.
 
+### Saved configs
+
+The launcher now includes a leftmost `☰` tab before **NotebookLM**. Click it to open config actions:
+
+- **Save** overwrites the currently loaded named config
+- **Save As...** asks for a new config name and saves the current launcher state as a new profile
+- **Load** shows your saved profiles and restores the selected one
+
+These named configs capture the launcher state together, including notebook ID, source IDs, prompt input folder, output folder, prompt-set name, collection name, Python path, and the current run flags. Profiles are stored locally in `launcher_profiles/` next to the launcher.
+
 ### Workflow tabs
 
 | Tab | What to do |
 |---|---|
 | **NotebookLM** | 1. Click **Login to NotebookLM** — a terminal opens. Sign in with Google, then press ENTER in that terminal. 2. Click **Check Auth State** to confirm the session was saved. 3. Click **Run Automation** to generate your Markdown files. |
 | **Build Hub** | Click **Build Site** to convert Markdown files into HTML. Click **Open Hub** to open the result in your browser. |
-| **Concepts** | Edit `data/concepts.csv` directly inside the launcher. Click **Save** when done. |
+| **Concepts** | Edit the current notebook folder's `concepts.csv` directly inside the launcher. Click **Save** when done. |
 | **AI Tutor** | Click **Start Ollama** (runs silently with a system tray icon), then **Start Server** to launch the tutor backend. |
 | **Settings** | Set paths, Python executable, and open your `.env` file for editing. |
+
+### Course / collection folders
+
+If you want separate study libraries for different classes or programs, use the launcher's **Course / collection name** field and click **Use/Create Course Folder**.
+
+- A name like `csci 372` maps the markdown output to `output/csci 372/`
+- That folder stays self-contained: `concepts.csv` lives there, markdown files go there, the study hub is built there, and `index.html` opens from there
+- The Build Hub step inherits the markdown output folder as both its markdown input and HTML output
+
+### Prompt set folders
+
+If you want different prompt packs for different workflows, use the launcher's **Prompt set name** field and click **Use/Create Prompt Folder**.
+
+- A name like `midterm-review` maps the prompt input to `prompts/midterm-review/`
+- Leave it blank to use the default `prompts/default/` folder
+- The launcher passes that selected prompt folder into the automation run, so the GUI prompt choice and the actual run stay in sync
+- New prompt folders are created for you, but they need `.txt` prompt files before a run will start
+
+### Notebook-specific setup
+
+For each NotebookLM notebook, the launcher can now save all of these together in one profile:
+
+- Notebook ID
+- Source IDs
+- Prompt input folder
+- Notebook output folder
+
+Use **List Notebooks** to fetch your notebooks from saved NotebookLM auth, then click the notebook row you want to use. After that, click **List Sources** to fetch that notebook's sources. Click a row in **Not Added** to add that source to the notebook config, and click a row in **Added** to remove it.
 
 ### Ollama system tray
 
@@ -260,6 +303,15 @@ nlm-auto --limit-concepts 1 --limit-prompts 9 --overwrite
 # Run all concepts with all prompts
 nlm-auto --overwrite
 
+# Run with a specific prompt set and output folder
+nlm-auto --prompts-dir "prompts/midterm-review" --output-dir "output/csci 372" --overwrite
+
+# Run with a notebook-specific ID and sources
+nlm-auto --notebook-id "your-notebook-id" --source-id "src-1" --source-id "src-2" --prompts-dir "prompts/midterm-review" --output-dir "output/csci 372" --overwrite
+
+# Run a specific course/program into its own folder
+nlm-auto --output-dir "output/csci 372" --overwrite
+
 # Preview what would run without calling NotebookLM
 nlm-auto --dry-run
 ```
@@ -268,8 +320,8 @@ nlm-auto --dry-run
 
 ```bash
 python src/notebooklm_automation/build_study_hub.py \
-  --input output \
-  --site-dir study_hub \
+  --input "output/csci 372" \
+  --site-dir "output/csci 372" \
   --title "My Study Hub" \
   --tutor-port 8000
 ```
@@ -290,10 +342,10 @@ uvicorn tutor_server:app --reload --port 8000
 
 ```bash
 # Windows
-start study_hub/index.html
+start output\\csci 372\\index.html
 
 # Mac
-open study_hub/index.html
+open output/csci\ 372/index.html
 ```
 
 ---
@@ -305,20 +357,24 @@ notebooklm-automation/
 ├── .env                          # Your configuration (not committed)
 ├── .env.example                  # Template — copy to .env and fill in
 ├── pyproject.toml                # Package definition and dependencies
-├── data/
-│   └── concepts.csv              # Your concept list (one per line)
 ├── prompts/
-│   ├── 01_why_it_matters.txt     # Prompt templates (run in order)
-│   ├── 02_core_identity.txt
+│   ├── default/
+│   │   ├── 01_why_it_matters.txt # Default prompt templates
+│   │   ├── 02_core_identity.txt
+│   │   └── ...
+│   ├── midterm-review/
+│   │   ├── 01_why_it_matters.txt
+│   │   └── ...
 │   └── ...
 ├── output/                       # Generated Markdown files (gitignored)
-│   ├── 01_software_development_lifecycle_sdlc.md
-│   └── ...
-├── study_hub/                    # Generated HTML site (gitignored)
-│   ├── index.html
-│   ├── tutor.css
-│   ├── tutor.js
-│   └── ...
+│   ├── csci 372/
+│   │   ├── concepts.csv
+│   │   ├── 01_software_development_lifecycle_sdlc.md
+│   │   ├── index.html
+│   │   ├── tutor.css
+│   │   ├── tutor.js
+│   │   └── ...
+│   └── berkeley msse/
 ├── logs/                         # Automation run logs (gitignored)
 ├── src/
 │   └── notebooklm_automation/
@@ -332,7 +388,7 @@ notebooklm-automation/
 │       ├── storage.py            # File writing helpers
 │       ├── template_loader.py    # CSV and prompt file loaders
 │       ├── notebooklm_service.py # notebooklm-py wrapper
-│       └── source_config.py      # NotebookLM source IDs
+│       └── source_config.py      # Fallback NotebookLM source IDs
 └── .notebooklm_state/
     └── storage_state.json        # Saved login session (gitignored)
 ```
@@ -356,7 +412,7 @@ A SQLite database (`tutor_state.db`) is created automatically on first run and s
 
 ### `build_study_hub.py` — HTML site builder
 
-Converts your numbered Markdown files into a static HTML site. Concepts are ordered by their numeric prefix (`01_`, `02_`, etc.) automatically — no manual ordering list required.
+Converts your numbered Markdown files into a static HTML site in the same notebook output folder. Concepts are ordered by their numeric prefix (`01_`, `02_`, etc.) automatically — no manual ordering list required.
 
 The builder injects two files into the site:
 
@@ -403,13 +459,18 @@ To share the launcher as a double-clickable `.exe` with no Python installation r
 
 ```bash
 # Activate your venv, then run from the project root:
-pyinstaller --onefile --windowed \
-  --add-data "src/notebooklm_automation/build_study_hub.py;." \
-  --add-data "src/notebooklm_automation/tutor_server.py;." \
-  src/notebooklm_automation/launcher.py
+# pyinstaller --onefile --windowed \
+#   --add-data "src/notebooklm_automation/build_study_hub.py;." \
+#   --add-data "src/notebooklm_automation/tutor_server.py;." \
+#   --add-data "scripts/list_sources.py;." \
+#   --add-data "scripts/list_notebooks.py;." \
+#   src/notebooklm_automation/launcher.py
+
+pyinstaller --onefile --windowed --add-data "src/notebooklm_automation/build_study_hub.py;." --add-data "src/notebooklm_automation/tutor_server.py;." --add-data "scripts/list_sources.py;." --add-data "scripts/list_notebooks.py;." src/notebooklm_automation/launcher.py
+
 ```
 
-The output is at `dist/launcher.exe`. The two `--add-data` flags copy `build_study_hub.py` and `tutor_server.py` into the same folder as the exe automatically.
+The output is at `dist/launcher.exe`. The `--add-data` flags copy `build_study_hub.py`, `tutor_server.py`, `list_sources.py`, and `list_notebooks.py` into the same folder as the exe automatically.
 
 > **Important:** The exe packages the launcher UI only. The automation, tutor server, and login still require Python at runtime. After running the exe for the first time, go to **Settings → Python executable** and point it to your `.venv/Scripts/python.exe`. This setting is saved and remembered permanently.
 
@@ -435,8 +496,11 @@ Apply the [library timeout fix](#critical-library-fix--increase-timeout). Also t
 **`Could not import module "tutor_server"`**
 uvicorn is looking in the wrong directory. Make sure the launcher's `_start_server` uses `cwd=str(s.parent)` where `s` is the resolved path to `tutor_server.py`.
 
+**`No .txt prompt files found in: ...`**
+The selected prompt folder exists, but it does not contain any prompt templates yet. Add your `.txt` prompt files there, or switch back to the base `prompts/` folder or another prompt-set folder that already has templates.
+
 **`No .md files found in: ...\dist\output`**
-The output folder is pointing to `dist/output` instead of your project's `output/` folder. Go to **Settings → Markdown output folder** and set it to the correct path, e.g. `C:\...\notebooklm-automated\output`.
+The markdown folder is pointing to `dist/output` instead of your project's real study set folder. Go to **NotebookLM** or **Settings**, set the correct markdown output folder, or use **Course / collection name** to recreate the right `output/<name>` path.
 
 **Ollama not found**
 Download and install Ollama from [ollama.com](https://ollama.com), then restart the launcher. Ollama must be on your system PATH.

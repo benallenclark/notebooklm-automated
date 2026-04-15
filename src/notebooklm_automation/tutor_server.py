@@ -446,7 +446,7 @@ async def get_library() -> dict:
 async def health() -> dict:
     return {
         "status": "ok",
-        "models": MODELS if "MODELS" in dir() else "dynamic",
+        "models": "dynamic",
         "db": str(DB_PATH),
     }
 

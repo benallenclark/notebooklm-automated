@@ -1,0 +1,55 @@
+Using only the selected sources, continue the explanation by tracing the purpose of [Concept Name] by following its chain of whys from the surface level to the deepest grounded end that the sources support.
+
+Important constraint:
+Do not stop at the first purpose.
+Do not stop at the technical mechanism.
+Do not stop at the system-level outcome if a deeper human, strategic, practical, or domain-level reason is clearly implied.
+Do not use the connecting sentence to reference outside course context, broader systems, or previously taught frameworks. If you use a connecting sentence, connect only from the introduction.
+Keep the purpose chain centered on [Concept Name] itself. Mention neighboring ideas only briefly if needed for contrast, not as the main arc.
+Assume the introduction already oriented the concept.
+Before section 1, write exactly 1 unlabeled transition sentence that connects from the introduction.
+It must say what is now clear and why tracing the purpose chain is the next step.
+Do not use lesson-theater or broader course context.
+
+Structure the answer exactly like this:
+
+1. Surface purpose
+· In one plain sentence, say the most immediate purpose of the concept.
+
+2. Why that purpose matters
+· Explain what problem, gap, task, question, or missing ability makes that immediate purpose necessary.
+
+3. Deeper objective underneath it
+· Explain what larger goal, state, outcome, or end is being served underneath the surface purpose.
+
+4. Ultimate technical outcome
+· State the final technical, operational, structural, or system-level effect this chain is trying to produce.
+
+5. Final stake / actor motive
+· Explain what achieving that ultimate technical outcome most likely lets the actor, user, system, or decision-maker actually gain, accomplish, avoid, influence, control, obtain, protect, or change.
+
+6. Full purpose ladder in one line
+· Complete this sentence:
+“[Concept Name] matters because it helps with ______, which serves ______, which produces ______, so that ultimately ______.”
+
+
+Requirements:
+· Follow the purpose chain until it reaches the most concrete final stake supported by the sources.
+· If the concept is mainly descriptive, trace the chain in terms of what it lets someone notice, explain, predict, distinguish, or reason about, and why that matters.
+· If the concept is mainly operational, trace the chain in terms of what it enables, what that produces, and what final outcome that serves.
+· If the concept is mainly formal, trace the chain in terms of what it lets someone prove, model, infer, measure, or optimize, and why that matters.
+· Section 4 and section 5 must be different:
+  - Section 4 = the final technical or system-level result
+  - Section 5 = the larger practical, strategic, human, or domain-level reason that result is valuable
+· If the sources do not explicitly state the final stake, give the strongest source-grounded likely motive and clearly mark it as an inference.
+· Do not invent motives that are not supported or strongly implied.
+· The goal is to make me feel:
+“Now I know not just what this concept does, but what it is ultimately in service of.”
+· After section 6, write exactly 1 unlabeled transition sentence that points only to the next section.
+· Use this form: “Now that X is clear, the next step is to Y because Z.”
+· X = the purpose chain or final stake this section clarified
+· Y = the big-picture story the next section will tell about this concept
+· Z = why that story is the natural next step
+· Do not label it.
+· Keep the transition at the level of this concept itself.
+· Do not mention broader systems, surrounding workflows, named strategies, or neighboring techniques unless section 6 made them unavoidable.

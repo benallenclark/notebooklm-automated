@@ -1,4 +1,12 @@
-Using only the selected sources, give me [Concept Name] as a short, plain-English story that preserves the chain of purposes.
+Before section 1, write exactly 1 unlabeled transition sentence that connects from the previous section.
+It must say what is now clear from the purpose chain and why a story is the next step.
+It must justify why a story is needed, not why an example is needed.
+Do not redefine the concept.
+Assume the purpose chain is already established. Do not repeat it point by point. Turn it into one flowing story.
+Use the first sentence to pick up from the need or stake already established, not to redefine the concept.
+Tell one concept-centered story. Do not widen the story into the surrounding ecosystem.
+Do not introduce specific surrounding concepts here unless they are absolutely necessary to tell the story truthfully.
+Using only the selected sources, turn the already-established purpose chain into a short, plain-English story about [Concept Name].
 
 Important constraint:
 I do not want a static summary.
@@ -26,9 +34,8 @@ Structure the answer exactly like this:
 · Make it feel like one flowing explanation that a learner can visualize.
 
 2. Bottom-line essence
-· In 1 sentence, complete this:
-  “Basically, this whole thing is about ______.”
-
+· Compress the story into one sentence. Do not redefine the concept from scratch.
+  
 Requirements:
 · Preserve the chain of purposes. Do not flatten the answer into a static description.
 · Write like a strong teacher helping the learner see the whole arc at once.
@@ -38,3 +45,11 @@ Requirements:
 · Do not strip away the final stake or the reason the concept matters.
 · The goal is to leave the learner thinking:
   “Now I can see the whole thing happening from beginning to end.”
+· After section 2, write exactly 1 unlabeled transition sentence that points only to the next section.
+· Use this form: “Now that X is clear, the next step is to Y because Z.”
+· X = the story this section made visible
+· Y = the concept’s core working logic
+· Z = why the mechanism now needs to be made explicit
+· Do not label it.
+· Do not name tools, implementations, subtypes, or surrounding systems in the transition.
+· Keep the handoff focused on core working logic only.

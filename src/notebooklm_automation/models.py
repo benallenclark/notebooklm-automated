@@ -4,8 +4,6 @@ from dataclasses import dataclass
 @dataclass(frozen=True)
 class Concept:
     name: str
-    notebook_id: str | None = None
-    source_ids: list[str] | None = None
 
 
 @dataclass(frozen=True)

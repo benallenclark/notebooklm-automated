@@ -28,6 +28,7 @@ build/
 launcher.spec
 launcher_settings.json
 launcher.exe
+launcher_profiles/
 
 # -----------------------------
 # Editor / OS noise

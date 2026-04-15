@@ -6,7 +6,6 @@ import logging
 import time
 
 from notebooklm import NotebookLMClient
-from notebooklm_automation.source_config import ACTIVE_SOURCE_IDS
 from notebooklm_automation.config import AppConfig
 from notebooklm_automation.models import Concept, PromptTemplate
 from notebooklm_automation.notebooklm_service import NotebookLMService
@@ -57,16 +56,17 @@ class StudyBatchRunner:
             self._print_dry_run_preview(concepts, prompts)
             return
 
-        async with await NotebookLMClient.from_storage() as client:
+        async with await NotebookLMClient.from_storage(str(self.config.auth_storage_path)) as client:
             service = NotebookLMService(client)
 
             for concept_index, concept in enumerate(concepts, start=1):
-                notebook_id = concept.notebook_id or self.config.default_notebook_id
+                notebook_id = self.config.default_notebook_id
+                source_ids = self.config.source_ids
 
                 if not notebook_id:
                     raise ValueError(
                         f"No notebook ID found for concept '{concept.name}'. "
-                        "Set DEFAULT_NOTEBOOK_ID in .env or provide notebook_id in the CSV."
+                        "Set the notebook ID in the launcher profile."
                     )
 
                 await self._run_concept(
@@ -74,6 +74,7 @@ class StudyBatchRunner:
                     concept=concept,
                     prompts=prompts,
                     notebook_id=notebook_id,
+                    source_ids=source_ids,
                     overwrite=overwrite,
                     concept_index=concept_index,
                     total_concepts=total_concepts,
@@ -86,6 +87,7 @@ class StudyBatchRunner:
         concept: Concept,
         prompts: list[PromptTemplate],
         notebook_id: str,
+        source_ids: list[str],
         overwrite: bool,
         concept_index: int,
         total_concepts: int,
@@ -141,7 +143,7 @@ class StudyBatchRunner:
                     answer = await service.ask(
                         notebook_id,
                         rendered_prompt,
-                        source_ids=ACTIVE_SOURCE_IDS,
+                        source_ids=source_ids,
                     )
 
                     elapsed = time.perf_counter() - started

@@ -72,6 +72,32 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Preview what would run without contacting NotebookLM.",
     )
+    parser.add_argument(
+        "--notebook-id",
+        default=None,
+        help="Override the NotebookLM notebook ID for this run.",
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=None,
+        help="Override the markdown output directory for this run.",
+    )
+    parser.add_argument(
+        "--prompts-dir",
+        default=None,
+        help="Override the prompt template directory for this run.",
+    )
+    parser.add_argument(
+        "--concepts-csv",
+        default=None,
+        help="Override the concepts CSV for this run.",
+    )
+    parser.add_argument(
+        "--source-id",
+        action="append",
+        default=None,
+        help="Include a source ID for this run. Repeat for multiple sources.",
+    )
 
     return parser
 
@@ -83,7 +109,13 @@ def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
 
-    config = load_config()
+    config = load_config(
+        notebook_id=args.notebook_id,
+        source_ids=args.source_id,
+        prompts_dir=args.prompts_dir,
+        output_dir=args.output_dir,
+        concepts_csv=args.concepts_csv,
+    )
     configure_logging(config.logs_dir)
 
     runner = StudyBatchRunner(config)

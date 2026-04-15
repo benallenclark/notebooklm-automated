@@ -5,7 +5,7 @@ AI tutor sidebar powered by a local Ollama model.
 
 Usage:
     python build_study_hub.py
-    python build_study_hub.py --input output --site-dir study_hub
+    python build_study_hub.py --input output --site-dir output
     python build_study_hub.py --title "My Study Hub" --tutor-port 8000
     python build_study_hub.py --no-tutor          # skip AI sidebar
 
@@ -1431,12 +1431,22 @@ def build_site(
 
     site_dir.mkdir(parents=True, exist_ok=True)
     raw_dir = site_dir / "raw"
+    if raw_dir.exists():
+        shutil.rmtree(raw_dir)
     raw_dir.mkdir(parents=True, exist_ok=True)
+
+    for html_file in site_dir.glob("*.html"):
+        html_file.unlink()
 
     # Write tutor assets once
     if tutor_enabled:
         (site_dir / "tutor.css").write_text(TUTOR_CSS, encoding="utf-8")
         (site_dir / "tutor.js").write_text(TUTOR_JS, encoding="utf-8")
+    else:
+        for asset_name in ("tutor.css", "tutor.js"):
+            asset_path = site_dir / asset_name
+            if asset_path.exists():
+                asset_path.unlink()
 
     entries: list[dict[str, str]] = []
 
@@ -1485,7 +1495,11 @@ def build_site(
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Build an HTML study hub from Markdown files.")
     p.add_argument("--input", default="output", help="Directory of .md files")
-    p.add_argument("--site-dir", default="study_hub", help="Output directory")
+    p.add_argument(
+        "--site-dir",
+        default=None,
+        help="Output directory. Defaults to the input directory when omitted.",
+    )
     p.add_argument("--title", default="NotebookLM Study Hub", help="Hub page title")
     p.add_argument("--tutor-port", default=8000, type=int, help="tutor_server.py port")
     p.add_argument("--no-tutor", action="store_true", help="Disable AI tutor sidebar")
@@ -1495,7 +1509,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     input_dir = Path(args.input).resolve()
-    site_dir = Path(args.site_dir).resolve()
+    site_dir = Path(args.site_dir).resolve() if args.site_dir else input_dir
     build_site(
         input_dir=input_dir,
         site_dir=site_dir,
